@@ -58,6 +58,17 @@ def test_toplayici_olaylari_bir_kez_toplar(ortam_yap, tmp_path):
     assert depo.etiket(f"ALARM_DIZIN_ERISILEMEZ|dizin:{dz}", depo.adlar_oku(o.db)) == "Dizine erişilemiyor · gelen"
 
 
+def test_kendini_sina_verisi_saatten_bagimsiz():
+    """Yapay akış her çağrıda aynı olmalı: başlangıç o anki saatten alınınca girdi kayıyor, sınama sonucu çağrıdan
+    çağrıya değişiyordu (yarı yarıya kalıyordu)."""
+    import time as _t
+    a = sentetik.uret()
+    _t.sleep(1.1)
+    b = sentetik.uret()
+    assert a.tok.tolist() == b.tok.tolist() and a.zaman.tolist() == b.zaman.tolist()
+    assert len(a.tok) > 6000                                          # 84 günlük akış
+
+
 def test_model_ogrenir_ve_gomulu_iliskiyi_dikkatle_bulur():
     """Kendini sına: 'Lojistik yanıtsız → devre kesildi' ilişkisi (arada sıradan trafik) Markov'un göremediği, self-attention'ın
     bulması gereken bir ilişkidir. Model Markov'u geçmeli ve dikkat haritasında bu ilişki ilk sırada çıkmalı."""

@@ -7,6 +7,10 @@ Gömülen düzen:
   * Lojistik gün içinde rastgele dosyalar; geri kalanı gürültü.
 Geçme koşulu: doğrulama kaybı Markov tabanından en az %5 düşük, ezber yok ve dikkat haritasında 'devre kesildi'
 satırında en güçlü (kendisi hariç) sütun 'Lojistik yanıtsız'. Gerçek veriye ve kullanılan modele dokunulmaz.
+
+Tekrarlanabilirlik: yapay akış saatten bağımsızdır (sabit başlangıç günü) ve 84 günlüktür. Başlangıç eskiden o anki
+saatten hesaplanıyordu; saniyeler kayınca girdi değişiyor, 42 günlük kısa akışta sonuç sınırda kaldığı için sınama
+yaklaşık yarı yarıya geçiyordu. 84 günle ilişki her denenen model / veri tohumunda açık farkla ilk sırada çıktı.
 """
 import time
 
@@ -19,11 +23,14 @@ TURLER = ["Dosya geldi · Muhasebe", "İletildi · Muhasebe", "Dosya geldi · Lo
 MUH, MUH_IL, LOJ, LOJ_IL, YANITSIZ, DEVRE, LOKAL, SLA, TEKRAR = range(1, 10)
 
 
-def uret(gun=42, tohum=11):
+TEMEL_ZAMAN = time.mktime((2026, 1, 5, 0, 0, 0, 0, 0, -1))       # sabit başlangıç (bir pazartesi, yerel gece yarısı)
+
+
+def uret(gun=84, tohum=11, bugun=None):
     rng = np.random.default_rng(tohum)
-    bugun = time.time()
-    bas = bugun - gun * 86400
-    bas -= (time.localtime(bas).tm_hour * 3600 + time.localtime(bas).tm_min * 60)          # gece yarısı
+    bas = (TEMEL_ZAMAN if bugun is None else bugun) - gun * 86400
+    lt = time.localtime(bas)
+    bas -= lt.tm_hour * 3600 + lt.tm_min * 60 + lt.tm_sec                                  # gece yarısı
     olay = []
     for d in range(gun):
         g0 = bas + d * 86400
