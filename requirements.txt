@@ -1,0 +1,4 @@
+loguru>=0.7.3
+xxhash>=3.4
+pywin32>=306
+psutil>=5.9

@@ -1,0 +1,41 @@
+# Çalışma verisi: veritabanları, lokal kayıt, betikler, asistan modeli.
+# İçindeki şifreler DPAPI ile o makineye bağlı şifrelidir; depoya girmez.
+veri/
+
+# Loglar
+loglar/
+
+# Sunucuya özgü kimlik bilgileri (sunucuda oluşur / belirlenir)
+config/kullanicilar.json
+config/betik_sifresi.json
+
+# Üretilen paketler ve test çıktıları
+dagitim/
+testler/_sonuc/
+
+# Python
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.venv/
+venv/
+
+# SQLite yan dosyaları ve geçiciler
+*.db
+*.db-wal
+*.db-shm
+*.tmp
+*.log
+
+# Editör / işletim sistemi
+.vscode/
+.idea/
+Thumbs.db
+desktop.ini
+
+# İç geliştirme kayıtları ve tasarım onayı görselleri (yerelde kalır)
+PROJE_DOSYALARI.xlsx
+araclar/proje_veri.py
+araclar/proje_belge.py
+araclar/olay_tablosu.py
+tasarim/

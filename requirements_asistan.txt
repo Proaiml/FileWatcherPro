@@ -1,0 +1,5 @@
+# Yapay zekâ asistanı (isteğe bağlı): yerel model eğitimi için PyTorch (CPU sürümü yeterli).
+# Kurulmazsa asistan olayları toplar ama model eğitemez; FileWatcherPro'nun geri kalanı etkilenmez.
+# İnternetsiz sunucu: wheel dosyasını başka makinede indirip 'pip install <dosya>.whl' ile kurun.
+numpy>=1.24
+torch>=2.2

@@ -1,0 +1,14 @@
+{
+  "veri_klasoru": "veri",
+  "log_klasoru": "loglar",
+  "kontrol_adres": "127.0.0.1",
+  "kontrol_port": 8770,
+  "eklentiler": [
+    {"ad": "tarama",  "modul": "eklentiler.tarama.tarayici"},
+    {"ad": "teslim",  "modul": "eklentiler.teslim.dagitici"},
+    {"ad": "kontrol", "modul": "eklentiler.kontrol.kontrol_api"},
+    {"ad": "izleme",  "modul": "eklentiler.izleme.izleyici"},
+    {"ad": "bildirim", "modul": "eklentiler.bildirim.bildirimci"},
+    {"ad": "asistan",  "modul": "eklentiler.asistan.asistan"}
+  ]
+}
